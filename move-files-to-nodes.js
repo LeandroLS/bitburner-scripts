@@ -1,5 +1,5 @@
 /** @param {NS} ns */
-import { bfsNodes } from "./bfsNodes";
+import { bfsNodes } from "./bfs-nodes";
 export async function main(ns) {
   const filesNames = ns.args
   function moveFile(networkNodes) {

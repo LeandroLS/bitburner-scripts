@@ -1,29 +1,18 @@
-import { bfsNodes } from "./bfsNodes";
+import { bfsNodes } from "./bfs-nodes";
 /** @param {NS} ns */
 export async function main(ns) {
-  const virusName = ns.args[0]
-  const ramCost = ns.getScriptRam(virusName)
+  const scriptName = ns.args[0]
 
-  function getPossibleThreads({ serverRam, ramCost }) {
-    let numThreads = parseInt(serverRam / ramCost)
-    if (numThreads === 0) {
-      numThreads = 1
-    }
-    return numThreads
-  }
-
-  function stopPreviousSameVirus({ node, virusName }) {
+  function stopPreviousSameScript({ node, scriptName }) {
     const processes = ns.ps(node)
-    const matchingProcesses = processes.filter((process) => process.filename === virusName)
+    const matchingProcesses = processes.filter((process) => process.filename === scriptName)
     matchingProcesses.forEach(process => ns.kill(process.pid))
   }
 
   function runScript(networkNodes) {
     for (const node of networkNodes) {
-      const serverRam = ns.getServerMaxRam(node)
-      const numThreads = getPossibleThreads({ serverRam, ramCost })
-      stopPreviousSameVirus({ node, virusName })
-      ns.exec(virusName, node, { threads: numThreads })
+      stopPreviousSameScript({ node, scriptName })
+      ns.exec(scriptName, node)
     }
   }
   const networkNodes = bfsNodes(ns)
