@@ -1,13 +1,7 @@
 import { bfsNodes } from "./bfs-nodes";
-/** @param {NS} ns */
+import { alreadyHacked } from "./can-hack-nodes";
+
 export async function main(ns) {
-  const cracks = [
-    ns.brutessh,
-    ns.ftpcrack,
-    ns.sqlinject,
-    ns.relaysmtp,
-    ns.httpworm
-  ]
   const scriptName = "give-me-money.js"
   const ramCost = ns.getScriptRam(scriptName)
   const host = ns.getHostname()
@@ -32,22 +26,6 @@ export async function main(ns) {
     }
   }
 
-  function alreadyHacked(target) {
-    const requiredHackingLevel = ns.getServerRequiredHackingLevel(target)
-    const actualHackingLevel = ns.getHackingLevel(target)
-    if (requiredHackingLevel > actualHackingLevel) return false
-
-    const numberOfPortsRequired = ns.getServerNumPortsRequired(target)
-
-    const cracksLength = cracks.length
-    if (numberOfPortsRequired > cracksLength) return false
-
-    const hasRoot = ns.hasRootAccess(target)
-    if (!hasRoot) return false
-
-    return true
-  }
-
   function getOptimalTargetsServers(targets) {
     const maxTargets = 20
     let possibleTargets = []
@@ -56,6 +34,7 @@ export async function main(ns) {
       if (alreadyHacked(target)) {
         if(target.includes("private-")) continue
         if(target.includes("home")) continue
+        if(ns.getServerMaxMoney(target) === 0) continue
         if(possibleTargets.length <= maxTargets){
           possibleTargets.push(target)
         } else {

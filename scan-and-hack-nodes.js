@@ -36,7 +36,7 @@ export async function main(ns) {
       }
       if (!ns.hasRootAccess(canHackNode)) {
         ns.nuke(canHackNode)
-        ns.alert("Hacked:", canHackNode)
+        ns.alert("Hacked:" + canHackNode)
       }
     }
   }
