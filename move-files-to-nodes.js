@@ -1,7 +1,15 @@
 /** @param {NS} ns */
 import { bfsNodes } from "./bfs-nodes";
 export async function main(ns) {
-  const filesNames = ns.args
+  let filesNames = ns.args
+  const needToMove = [
+    "get-targets-for-give-me-money.js",
+    "give-me-money.js",
+    "bfs-nodes.js"
+  ]
+  if(filesNames.length === 0){
+    filesNames = needToMove
+  }
   function moveFile(networkNodes) {
     for (const node of networkNodes) {
       filesNames.forEach(file => {

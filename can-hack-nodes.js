@@ -1,5 +1,13 @@
+const cracks = [
+  "brutessh",
+  "ftpcrack",
+  "sqlinject",
+  "relaysmtp",
+  "httpworm"
+]
+
 export function canHack({ ns, target }) {
-  if (alreadyHacked(target)) return false
+  if (alreadyHacked({ ns, target })) return false
   const requiredHackingLevel = ns.getServerRequiredHackingLevel(target)
   const actualHackingLevel = ns.getHackingLevel(target)
   if (requiredHackingLevel > actualHackingLevel) return false
