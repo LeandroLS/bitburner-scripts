@@ -8,7 +8,6 @@ export async function main(ns) {
       ns.httpworm
     ]
   
-  
     function bfsNodes() {
       const start = ns.getHostname()
       const queue = [start];
