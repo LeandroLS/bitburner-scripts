@@ -17,7 +17,6 @@ export async function main(ns) {
 
   function runScript(optimalNodesToRunScript) {
     let threadsPerNode = parseInt(numThreads / optimalNodesToRunScript.length)
-
     if (threadsPerNode === 0) {
       threadsPerNode = 1
     }

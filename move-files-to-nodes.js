@@ -5,6 +5,7 @@ export async function main(ns) {
   const needToMove = [
     "get-targets-for-give-me-money.js",
     "give-me-money.js",
+    "can-hack-nodes.js",
     "bfs-nodes.js"
   ]
   if(filesNames.length === 0){

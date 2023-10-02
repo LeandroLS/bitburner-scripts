@@ -2,20 +2,24 @@
 import { bfsNodes } from "./bfs-nodes";
 import { canHack } from "./can-hack-nodes";
 export async function main(ns) {
-  const cracks = [
-    ns.brutessh,
-    ns.ftpcrack,
-    ns.sqlinject,
-    ns.relaysmtp,
-    ns.httpworm
-  ]
+  const cracks = {
+    "BruteSSH.exe": ns.brutessh,
+    "FTPCrack.exe": ns.ftpcrack,
+    "SQLInject.exe": ns.sqlinject,
+    "RelaySTMP.exe": ns.relaysmtp,
+    "HTTPWorm.exe": ns.httpworm
+  }
+
 
   function hackTargets(canHackNodes) {
     for (const canHackNode of canHackNodes) {
       ns.print("Hacking:", canHackNode)
-      for (const crack of cracks) {
-        crack(canHackNode)
+      for (const crackName in cracks) {
+        if (ns.fileExists(crackName, "home")) {
+          cracks[crackName](canHackNode)
+        }
       }
+
       if (!ns.hasRootAccess(canHackNode)) {
         ns.nuke(canHackNode)
         ns.alert("Hacked:" + canHackNode)

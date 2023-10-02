@@ -2,7 +2,7 @@ export async function main(ns) {
   let maxServers = ns.getPurchasedServerLimit();
   let maxSizeRam = ns.getPurchasedServerMaxRam();
   let money = ns.getPlayer().money;
-  const maxRam = 16384
+  const maxRam = 32768
   while (true) {
     for (let i = 0; i < maxServers; i++) {
       if (ns.serverExists("private-" + i)) {
