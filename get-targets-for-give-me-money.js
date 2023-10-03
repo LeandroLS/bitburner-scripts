@@ -42,8 +42,7 @@ export async function main(ns) {
             const targetMaxMoney = ns.getServerMaxMoney(target)
             return nodeMaxMoney < targetMaxMoney
           })
-          possibleTargets = possibleTargets.slice(lowerMoneyTargetIndex + 1)
-          possibleTargets.push(target)
+          possibleTargets.splice(lowerMoneyTargetIndex,1,target)
         }
       }
     }
