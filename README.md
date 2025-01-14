@@ -1,3 +1,5 @@
 # bitburner-scripts
 
 Just scripts which I was usigin in a coding game
+
+https://store.steampowered.com/app/1812820/Bitburner/
